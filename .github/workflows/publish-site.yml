@@ -1,0 +1,53 @@
+name: Publish Site
+
+on: [workflow_dispatch, push]
+
+jobs:
+  jekyll_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.PUBLISH_PRIVATE_KEY }}
+
+      - name: Checkout source branch for building Pages
+        uses: actions/checkout@v2
+        with:
+          path: 'source'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install ruby-full build-essential zlib1g-dev
+          sudo gem install bundler -v "$(grep -A 1 "BUNDLED WITH" source/Gemfile.lock | tail -n 1)"
+
+      - name: Jekyll Build
+        run: |
+          mkdir build
+          cd source
+          bundle install
+          bundle exec jekyll build -d ../build --trace
+
+      - name: Clone repo for GitHub Pages
+        run: git clone git@github.com:death-match-russell/death-match-russell.github.io.git published
+
+      - name: Copy built site files into Git branch
+        run: |
+          rm -rf published/*
+          cp -a build/. published
+          touch published/.nojekyll
+
+      - name: Add, Commit then Push
+        run: |
+          cd published
+          git config --local user.email 'action@github.com'
+          git config --local user.name 'GitHub Action'
+          git add -A .
+          if [ "$(git status --porcelain)" ]; then
+            echo "Commit required"
+            git commit -m 'Updates compiled site files'
+            git push --quiet origin master
+          else
+            echo "No commit required"
+          fi
