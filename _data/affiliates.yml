@@ -1,9 +1,25 @@
-- name: Brainbuster Tees
-  url: https://brainbustertees.com/
-  image: Brainbusterb Tees.png
+- name: XPW Wrestling
+  url: https://www.facebook.com/xpw.wrestling.official
+  image: XPW Wrestling.png
+
+- name: Stand Alone Wrestling
+  url: https://www.facebook.com/standalonewrestling
+  image: Stand Alone Wrestling.png
+
+- name: Titan Championship Wrestling
+  url: https://www.facebook.com/Titanchampionshipwrestling
+  image: Titan Championship Wrestling.png
 
 - name: Chosen Pro Wrestling
   image: Chosen Pro Wrestling.png
+
+- name: TCW Goddesses of War
+  url: https://www.facebook.com/tcw.goddesses
+  image: TCW Goddesses of War.png
+
+- name: Brainbuster Tees
+  url: https://brainbustertees.com/
+  image: Brainbusterb Tees.png
 
 - name: Collar X Elbow
   url: https://store.collarandelbowbrand.com/
@@ -25,18 +41,4 @@
   url: https://www.facebook.com/ShoreStarWrestling
   image: Shore Star Wrestling.png
 
-- name: Stand Alone Wrestling
-  url: https://www.facebook.com/standalonewrestling
-  image: Stand Alone Wrestling.png
 
-- name: TCW Goddesses of War
-  url: https://www.facebook.com/tcw.goddesses
-  image: TCW Goddesses of War.png
-
-- name: Titan Championship Wrestling
-  url: https://www.facebook.com/Titanchampionshipwrestling
-  image: Titan Championship Wrestling.png
-
-- name: XPW Wrestling
-  url: https://www.facebook.com/xpw.wrestling.official
-  image: XPW Wrestling.png
