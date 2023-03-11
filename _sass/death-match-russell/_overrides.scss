@@ -7,6 +7,14 @@ body {
   color: white;
 }
 
+.post-heading > h1 {
+  background-color: black;
+  border-radius: 1em;
+  padding: 0.3em;
+  text-align: center;
+  word-break: break-word;
+}
+
 body > header > div.container > div > div > div.page-heading {
   display: flex;
   flex-direction: column;
