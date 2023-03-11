@@ -1,0 +1,58 @@
+name: Update Posts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+
+jobs:
+  update_posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p $HOME/.ssh/
+          echo "${{ secrets.UPDATE_POSTS_PRIVATE_KEY }}" > $HOME/.ssh/id_rsa
+          chmod 600 $HOME/.ssh/id_rsa
+          ssh-keyscan github.com >> $HOME/.ssh/known_hosts
+
+      - name: Checkout source branch
+        run: |
+          mkdir source
+          git clone --recurse-submodules ssh://git@github.com/death-match-russell/website-source.git source
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r source/post-updater/requirements.txt
+
+      - name: Update All Podcasts
+        run: |
+          ./source/post-updater/generate_podcast_posts.py \
+          --mindate "$(date -d "yesterday" '+%Y-%m-%d')" \
+          --output source/_posts/ \
+          --podcastsfile source/_data/podcasts.yml \
+          --youtubekey ${{ secrets.YOUTUBE_API_KEY }} \
+          --spotifyid ${{ secrets.SPOTIFY_CLIENT_ID }} \
+          --spotifysecret ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+
+      - name: Add, Commit then Push
+        run: |
+          cd source
+          git config --local user.email 'action@github.com'
+          git config --local user.name 'GitHub Action'
+          git add -A .
+          if [ "$(git status --porcelain)" ]; then
+            echo "Commit required"
+            git commit -m 'Updated posts'
+            git push --quiet origin master
+          else
+            echo "No commit required"
+          fi
