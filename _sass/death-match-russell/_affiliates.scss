@@ -1,0 +1,12 @@
+.affiliates {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .4em;
+  overflow: hidden;
+
+  img, > a {
+    height: 5em;
+  }
+}

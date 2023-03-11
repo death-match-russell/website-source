@@ -1,0 +1,13 @@
+<div class="affiliates">
+  {% assign affiliates = site.data['affiliates'] %}
+  {% for affiliate in affiliates %}
+    {% if affiliate.url %}
+      <a href="{{ affiliate.url }}" target="_blank" rel="noopener noreferrer">
+    {% endif %}
+    <img src="/assets/images/affiliates/{{ affiliate.image }}" alt="{{ affiliate.name }}"
+         title="{{ affiliate.name }}"/>
+    {% if affiliate.url %}
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>
