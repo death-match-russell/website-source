@@ -1,0 +1,12 @@
+div.photos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .25em;
+
+  > a {
+    display: flex;
+    height: 8em;
+  }
+}

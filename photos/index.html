@@ -1,0 +1,14 @@
+---
+layout: page
+title: Photos
+---
+
+<div class="photos">
+  {% for image in site.static_files %}
+  {% if image.path contains '/assets/images/photos/' %}
+  <a href="{{ site.baseurl }}{{ image.path }}" data-lightbox="photos" data-title="{{ image.path }}"><img
+      src="{{ site.baseurl }}{{ image.path }}"></a>
+
+  {% endif %}
+  {% endfor %}
+</div>
