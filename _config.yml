@@ -43,6 +43,8 @@ defaults:
       path: ""
     values:
       background: "/assets/images/main-banner.png"
+      # For social SEO image, the plugin cannot know the resultant base url so I'm manually setting it here
+      image: "https://deathmatchrussellpod.com/assets/images/logo.jpg"
 
   # Build settings
 theme: jekyll-theme-clean-blog
