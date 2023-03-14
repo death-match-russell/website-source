@@ -82,4 +82,6 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - post-updater
+  - README.md
+  - readme/
 
