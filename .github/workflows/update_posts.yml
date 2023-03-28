@@ -52,7 +52,7 @@ jobs:
           if [ "$(git status --porcelain)" ]; then
             echo "Commit required"
             git commit -m 'Updated posts'
-            git push --quiet origin master
+            git push --quiet origin main
           else
             echo "No commit required"
           fi
